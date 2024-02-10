@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+  <div class="container">
+  <a class="navbar-brand" [routerLink]="['/home']">Dating App</a>
+ 
+    <ul *ngIf="Loggedin()" class="navbar-nav mr-auto">
+      <li class="nav-item active" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/member']">member </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/list']">list</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link " [routerLink]="['/message']">message</a>
+      </li>
+    </ul>
+    <div *ngIf="Loggedin()" class="dropdown" dropdown >
+      <a class="dropdown-toggle text-light" dropdownToggle >
+        Welcome {{authservice.decode?.unique_name}}
+      </a>
+      <div class="dropdown-menu mt-3" *dropdownMenu>
+        <a class="dropdown-item" [routerLink]="['/edit']"><i class="fa fa-user"></i>Edit profile</a>
+        <a class="dropdown-item" (click)='Loogedout()'><i class="fa fa-sign-out"></i>Logout</a>
+      </div>
+    </div>
+    <form *ngIf="!Loggedin()"   #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+      <input class="form-control mr-sm-2" type="text" required name="Username" placeholder="Username" [(ngModel)]="model.Username"/>
+      <input class="form-control mr-sm-2" type="text" required name="Password" placeholder="Password" [(ngModel)]="model.Password"/>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+    </form>
+  </div>
+</nav>
